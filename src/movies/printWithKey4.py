@@ -1,8 +1,7 @@
 from abc import abstractmethod
-from abc import abstractmethod
 from InterfacePrintList import InterfacePrintList
 
-class printWithKey2(InterfacePrintList):
+class printWithKey4(InterfacePrintList):
 
     @abstractmethod
     def printList(self):
