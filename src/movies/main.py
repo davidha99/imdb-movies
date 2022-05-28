@@ -15,6 +15,12 @@ session = DEFAULT_SESSION_FACTORY()
 
 
 def main():
+
+    #Interface Segregation - By not communicating directly to the concrete classes, we can assure interface segregation because
+    #we will only be able to use methods declared in Facade. If Fetcher had more methods declared, we will not be able to access them
+
+    #Check about Dependency Inversion
+    
     # Facade
     facade = Facade()
     facade.download_data()
