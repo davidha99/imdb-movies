@@ -3,8 +3,13 @@ from typing import List
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from Facade import Facade
+from InterfacePrintList import InterfacePrintList
 
 from movies.models import get_postgres_uri
+from movies.printWithKey1 import printWithKey1
+from movies.printWithKey2 import printWithKey2
+from movies.printWithKey3 import printWithKey3
+from movies.printWithKey4 import printWithKey4
 
 DEFAULT_SESSION_FACTORY = sessionmaker(
     bind=create_engine(
@@ -39,6 +44,15 @@ def print_recommendations(movie_list: List, user_preference_key: int) -> None:
             print(f"{n}: {title}")
             n += 1
 
+    #Backwards - Descending order
+    n = len(movie_list)
+    for movie in reversed(movie_list):
+        title = movie["movie_title"]
+        movie_preference_key = movie["preference_key"]
+        if user_preference_key == movie_preference_key:
+            print(f"{n}: {title}")
+            n -= 1
+
 def main():
     preference1, preference2, preference3 = print_menu()
     user_preference_key = algorithm(preference1, preference2, preference3)
@@ -46,7 +60,8 @@ def main():
     #Interface Segregation - By not communicating directly to the concrete classes, we can assure interface segregation because
     #we will only be able to use methods declared in Facade. If Fetcher had more methods declared, we will not be able to access them
 
-    #Check about Dependency Inversion
+    #Not sure - Dependency Inversion - It is implemented by having communication to the interfaces and not concrete classes, in this
+    #example, with facade class. We eliminate dependency between fetcher, downloader and and main class.
     
     # Facade
     facade = Facade()
@@ -54,7 +69,21 @@ def main():
     list = facade.fetch_movies()
 
     # Print final movie list from user preferences
-    print_recommendations()
+    print_recommendations(list, user_preference_key)
+ 
+
+    #Implementing strategy pattern to print final list to users
+    if user_preference_key == 1:
+        printing_list = printWithKey1()
+    elif user_preference_key == 2:
+        printing_list = printWithKey2()
+    elif user_preference_key == 3:
+        printing_list = printWithKey3()
+    elif user_preference_key == 4:
+        printing_list = printWithKey4()
+    
+    InterfacePrintList.printList(printing_list)
+
 
     # Factory
     fields = ["preference_key", "movie_title", "star_cast", "rating", "year", "place", "vote", "link"]

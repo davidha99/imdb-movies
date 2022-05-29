@@ -6,4 +6,4 @@ class printWithKey3(InterfacePrintList):
     @abstractmethod
     def printList(self):
         #Implementation goes here
-        return super().printList()
+        pass
