@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Genres</title>
+</head>
+<body>
+    <h1>Movie Genres</h1>
+    <h4>Select 3 movie genres</h4>
+
+    <form action="./recommendations" method="POST">
+        <input type="checkbox" name="comedy" id="genre">
+        <label for="comedy">Comedy</label><br>
+        <input type="checkbox" name="drama" id="genre">
+        <label for="drama">Drama</label><br>
+        <input type="checkbox" name="sci-fi" id="genre">
+        <label for="sci-fi">Sci-Fi</label><br>
+        <input type="checkbox" name="romantic" id="genre">
+        <label for="Romantic">Romantic</label><br>
+        <input type="checkbox" name="adventure" id="genre">
+        <label for="adventure">Adventure</label><br><br>
+        <button type="submit">Enter</button>
+    </form>
+</body>
+</html>
