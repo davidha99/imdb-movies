@@ -60,9 +60,14 @@ def get_recommendations():
         preference_keys = list(file.iloc[:,0].values)
         preference_movies = []
 
-        for i in range(len(all_movies)):
-            if preference_keys[i] == preference_key:
-                preference_movies.append(all_movies[i])
+        if request.form.get("rating"):
+            for i in reversed(range(len(all_movies))):
+                if preference_keys[i] == preference_key:
+                    preference_movies.append(all_movies[i])
+        else:
+            for i in range(len(all_movies)):
+                if preference_keys[i] == preference_key:
+                    preference_movies.append(all_movies[i])
 
         return render_template("recommendations.html", preference_movies=preference_movies)
         
