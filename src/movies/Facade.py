@@ -2,8 +2,12 @@ from Fetcher import Fetcher
 from Downloader import Downloader
 
 class Facade:
+    def __init__(self, downloader, fetcher) -> None:
+        self.downloader = downloader
+        self.fetcher = fetcher
+
     def download_data(self):
-        Downloader.download()
+        self.downloader.download()
 
     def fetch_movies(self):
-        return Fetcher.fetch_movies()
+        return self.fetcher.fetch_movies(self.downloader)

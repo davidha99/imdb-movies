@@ -1,22 +1,23 @@
-# SRP - El fetcher es responsable de extraer toda la información de las pelis
+# Design principle: Single Responsability Principle - The fetcher is responsible for the 
+# movies' information extraction
 
 from typing import List
 import re
 from Downloader import Downloader
 from InterfaceFetcher import InterfaceFetcher
 
-class Fetcher(InterfaceFetcher):
-    def fetch_movies(self) -> List:
-        # create a empty list for storing
+class Fetcher(InterfaceFetcher):        
+    def fetch_movies(self, downloader : Downloader) -> List:
+        # create an empty list for storing
         # movie information
         list = []
 
         # Get data from Downloader getters
-        movies = Downloader.movies
-        links = Downloader.links
-        crew = Downloader.crew
-        ratings = Downloader.rating
-        votes = Downloader.votes
+        movies = downloader.movies
+        links = downloader.links
+        crew = downloader.crew
+        ratings = downloader.rating
+        votes = downloader.votes
 
         # Iterating over movies to extract
         # each movie's details
